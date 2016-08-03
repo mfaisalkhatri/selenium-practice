@@ -5,6 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /**
@@ -28,20 +29,24 @@ public class LoginTest extends BaseSeleniumTest {
 		if (js != null) js.executeScript ("arguments[0].setAttribute('style', arguments[1]);", element, this.style);
 	}
 
-	@Test
-	public void testHappyPath () throws InterruptedException {
+	@DataProvider (name = "Cases")
+	public Object [] [] loginCases () {
+		return new Object [] [] { { "tomsmith", "SuperSecretPassword!", true }, { "tomsmith", "123", false } };
+	}
+
+	@Test (dataProvider = "Cases")
+	public void testLogin (final String user, final String pwd, final boolean shouldWork) throws InterruptedException {
 		final WebElement form = driver.findElement (By.cssSelector ("#login"));
 		final WebElement username = form.findElement (By.cssSelector ("#username"));
 		highlight (username);
 		unhighlight (username);
 		username.click ();
-		username.sendKeys ("tomsmith");
+		username.sendKeys (user);
 
 		final WebElement password = form.findElement (By.cssSelector ("#password"));
 		highlight (password);
 		unhighlight (password);
 		password.click ();
-		final String pwd = "SuperSecretPassword!";
 		for (final char c : pwd.toCharArray ()) {
 			password.sendKeys (Character.toString (c));
 		}
@@ -54,16 +59,19 @@ public class LoginTest extends BaseSeleniumTest {
 		final WebElement page2 = driver.findElement (By.cssSelector ("#flash"));
 		final String pagetitle = page2.getText ();
 
-		Assert.assertTrue (pagetitle.contains ("You logged into a secure area!"));
-
-		final WebElement logout = driver.findElement (By.cssSelector (".button.secondary.radius"));
-		highlight (logout);
-		unhighlight (logout);
-		logout.click ();
-
+		if (shouldWork) {
+			Assert.assertTrue (pagetitle.contains ("You logged into a secure area!"));
+			final WebElement logout = driver.findElement (By.cssSelector (".button.secondary.radius"));
+			highlight (logout);
+			unhighlight (logout);
+			logout.click ();
+		}
+		else {
+			Assert.assertTrue (pagetitle.contains ("Your password is invalid!"));
+		}
 	}
 
-	@Test
+	@Test (invocationCount = 3, enabled = false)
 	public void testsadPath () {
 		final WebElement form = driver.findElement (By.cssSelector ("#login"));
 		final WebElement username = form.findElement (By.cssSelector ("#username"));
