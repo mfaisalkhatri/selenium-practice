@@ -70,7 +70,7 @@ public class Session {
 			else {
 				ctor = cls.getConstructor ();
 				if (ctor != null) {
-					ret = ctor.newInstance (parent);
+					ret = ctor.newInstance ();
 				}
 			}
 		}
@@ -111,6 +111,15 @@ public class Session {
 	@SuppressWarnings ("unchecked")
 	public <T> T executeJavaScript (final String script, final Object... args) {
 		return (T) ((JavascriptExecutor) this.driver).executeScript (script, args);
+	}
+
+	/**
+	 * @author Wasiq B
+	 * @since 05-Aug-2016 4:17:17 pm
+	 * @return the settings
+	 */
+	public ISettings getSettings () {
+		return this.settings;
 	}
 
 	/**

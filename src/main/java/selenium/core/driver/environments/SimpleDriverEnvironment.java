@@ -52,6 +52,7 @@ public class SimpleDriverEnvironment <TDriver extends WebDriver> implements IDri
 	private void setupDriver (final WebDriver driver) {
 		driver.manage ().window ().maximize ();
 		driver.manage ().timeouts ().implicitlyWait (this.timeToWait.getTime (), this.timeToWait.getUnit ());
+		driver.manage ().timeouts ().pageLoadTimeout (this.timeToWait.getTime (), this.timeToWait.getUnit ());
 	}
 
 	/*
