@@ -1,9 +1,5 @@
 package selenium.core;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.ParameterizedType;
-
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -41,11 +37,20 @@ public class Session {
 
 	/**
 	 * @author Wasiq B
-	 * @since 31-Jul-2016 12:25:41 pm
+	 * @since 07-Aug-2016 2:46:31 pm
+	 * @param nextClasses
 	 * @return
 	 */
-	public <T extends IBlock> T currentBlock () {
-		return currentBlock (null);
+//	public <T extends IBlock> T currentBlock () {
+//		return this. <T>currentBlock (null);
+//	}
+	
+	public <T extends IBlock> CurrentBlock <T> current (Class <T> target) {
+		return new CurrentBlock <T> (this, null, target);
+	}
+
+	public <T extends IBlock> CurrentBlock <T> current (final WebElement parent, Class <T> target) {
+		return new CurrentBlock <T> (this, parent, target);
 	}
 
 	/**
@@ -54,32 +59,10 @@ public class Session {
 	 * @param parent
 	 * @return
 	 */
-	@SuppressWarnings ("unchecked")
-	public <T extends IBlock> T currentBlock (final WebElement parent) {
-		T ret = null;
-		try {
-			final ParameterizedType type = (ParameterizedType) getClass ().getGenericSuperclass ();
-			final Class <T> cls = (Class <T>) type.getActualTypeArguments () [0];
-			Constructor <T> ctor = null;
-			if (parent != null) {
-				ctor = cls.getConstructor (WebElement.class);
-				if (ctor != null) {
-					ret = ctor.newInstance (parent);
-				}
-			}
-			else {
-				ctor = cls.getConstructor ();
-				if (ctor != null) {
-					ret = ctor.newInstance ();
-				}
-			}
-		}
-		catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException |
-				InvocationTargetException e) {
-			e.printStackTrace ();
-		}
-		return ret;
-	}
+//	public <T extends IBlock> T currentBlock (final WebElement parent) {
+//		CurrentBlock <T> block = new CurrentBlock <T> ();
+//		return block.currentBlock (this, parent);
+//	}
 
 	/**
 	 * @author Wasiq B
@@ -124,12 +107,13 @@ public class Session {
 
 	/**
 	 * @author Wasiq B
-	 * @since 30-Jul-2016 1:04:42 pm
+	 * @since 07-Aug-2016 2:55:31 pm
 	 * @param url
+	 * @param nextClasses
 	 * @return
 	 */
-	public <T extends IBlock> T navigateTo (final String url) {
+	public Session navigateTo (final String url) {
 		this.driver.navigate ().to (url);
-		return currentBlock ();
+		return this;
 	}
 }

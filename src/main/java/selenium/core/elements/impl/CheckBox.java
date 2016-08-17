@@ -36,9 +36,9 @@ public class CheckBox <T extends IBlock> extends Clickable <T> implements ICheck
 	 * @see selenium.core.elements.ICheckBox#check()
 	 */
 	@Override
-	public T check () {
-		if (!selected ()) toggle ();
-		return session ().currentBlock (parent ());
+	public T check (Class <T> target) {
+		if (!selected ()) toggle (target);
+		return session ().current (parent (), target).currentBlock ();
 	}
 
 	/*
@@ -46,9 +46,9 @@ public class CheckBox <T extends IBlock> extends Clickable <T> implements ICheck
 	 * @see selenium.core.elements.ICheckBox#toggle()
 	 */
 	@Override
-	public T toggle () {
+	public T toggle (Class <T> target) {
 		parent ().click ();
-		return session ().currentBlock (parent ());
+		return session ().current (parent (), target).currentBlock ();
 	}
 
 	/*
@@ -56,8 +56,8 @@ public class CheckBox <T extends IBlock> extends Clickable <T> implements ICheck
 	 * @see selenium.core.elements.ICheckBox#uncheck()
 	 */
 	@Override
-	public T uncheck () {
-		if (selected ()) toggle ();
-		return session ().currentBlock (parent ());
+	public T uncheck (Class <T> target) {
+		if (selected ()) toggle (target);
+		return session ().current (parent (), target).currentBlock ();
 	}
 }

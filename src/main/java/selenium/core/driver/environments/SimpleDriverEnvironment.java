@@ -20,7 +20,7 @@ public class SimpleDriverEnvironment <TDriver extends WebDriver> implements IDri
 	 * @since 26-Jul-2016 6:22:11 pm
 	 */
 	public SimpleDriverEnvironment () {
-		this (new TimeSpan (10, TimeUnit.SECONDS));
+		this (new TimeSpan (30, TimeUnit.SECONDS));
 	}
 
 	/**
@@ -50,9 +50,9 @@ public class SimpleDriverEnvironment <TDriver extends WebDriver> implements IDri
 	 * @since 27-Jul-2016 8:06:43 pm
 	 */
 	private void setupDriver (final WebDriver driver) {
-		driver.manage ().window ().maximize ();
 		driver.manage ().timeouts ().implicitlyWait (this.timeToWait.getTime (), this.timeToWait.getUnit ());
 		driver.manage ().timeouts ().pageLoadTimeout (this.timeToWait.getTime (), this.timeToWait.getUnit ());
+		driver.manage ().window ().maximize ();
 	}
 
 	/*

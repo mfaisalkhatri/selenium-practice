@@ -37,12 +37,12 @@ public class TextField <T extends IBlock> extends Clickable <T> implements IText
 	 * @see selenium.core.elements.ITextField#appendText(java.lang.String)
 	 */
 	@Override
-	public T appendText (final String text) {
+	public T appendText (final String text, Class <T> target) {
 		final char [] chrs = text.toCharArray ();
 		for (final char c : chrs) {
 			parent ().sendKeys (Character.toString (c));
 		}
-		return session ().currentBlock (parent ());
+		return session ().current (parent (), target).currentBlock ();
 	}
 
 	/*
@@ -50,9 +50,9 @@ public class TextField <T extends IBlock> extends Clickable <T> implements IText
 	 * @see selenium.core.elements.ITextField#enterText(java.lang.String)
 	 */
 	@Override
-	public T enterText (final String text) {
+	public T enterText (final String text, Class <T> target) {
 		parent ().clear ();
-		return appendText (text);
+		return appendText (text, target);
 	}
 
 	/*
@@ -60,9 +60,9 @@ public class TextField <T extends IBlock> extends Clickable <T> implements IText
 	 * @see selenium.core.elements.ITextField#press(selenium.core.Key)
 	 */
 	@Override
-	public T press (final Key key) {
+	public T press (final Key key, Class <T> target) {
 		parent ().sendKeys (key.value ());
-		return session ().currentBlock (parent ());
+		return session ().current (parent (), target).currentBlock ();
 	}
 
 	/*

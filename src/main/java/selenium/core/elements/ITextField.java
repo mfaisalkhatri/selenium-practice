@@ -13,7 +13,7 @@ public interface ITextField <T extends IBlock> extends IClickable <T> {
 	 * @param text
 	 * @return
 	 */
-	T appendText (String text);
+	T appendText (String text, Class <T> target);
 
 	/**
 	 * @author Wasiq B
@@ -21,7 +21,7 @@ public interface ITextField <T extends IBlock> extends IClickable <T> {
 	 * @param text
 	 * @return
 	 */
-	T enterText (String text);
+	T enterText (String text, Class <T> target);
 
 	/**
 	 * @author Wasiq B
@@ -29,5 +29,5 @@ public interface ITextField <T extends IBlock> extends IClickable <T> {
 	 * @param key
 	 * @return
 	 */
-	T press (Key key);
+	T press (Key key, Class <T> target);
 }

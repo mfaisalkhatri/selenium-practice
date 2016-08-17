@@ -13,7 +13,7 @@ public interface IDateField <T extends IBlock> extends ITextField <T> {
 	 * @param date
 	 * @return
 	 */
-	T enterDate (Date date);
+	T enterDate (Date date, Class <T> target);
 
 	/**
 	 * @author Wasiq B

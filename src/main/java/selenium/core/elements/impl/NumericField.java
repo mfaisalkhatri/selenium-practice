@@ -36,8 +36,8 @@ public class NumericField <T extends IBlock> extends TextField <T> implements IN
 	 * @see selenium.core.elements.INumericField#enterNumber(double)
 	 */
 	@Override
-	public T enterNumber (final double value) {
-		return super.enterText (Double.toString (value));
+	public T enterNumber (final double value, Class <T> target) {
+		return super.enterText (Double.toString (value), target);
 	}
 
 	/*
@@ -45,8 +45,8 @@ public class NumericField <T extends IBlock> extends TextField <T> implements IN
 	 * @see selenium.core.elements.INumericField#enterNumber(long)
 	 */
 	@Override
-	public T enterNumber (final long value) {
-		return super.enterText (Long.toString (value));
+	public T enterNumber (final long value, Class <T> target) {
+		return super.enterText (Long.toString (value), target);
 	}
 
 	/*

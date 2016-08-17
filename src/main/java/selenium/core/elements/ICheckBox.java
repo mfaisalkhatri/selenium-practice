@@ -10,19 +10,19 @@ public interface ICheckBox <T extends IBlock> extends ISelectable, IClickable <T
 	 * @since 26-Jul-2016 6:09:53 pm
 	 * @return
 	 */
-	T check ();
+	T check (Class <T> target);
 
 	/**
 	 * @author Wasiq B
 	 * @since 26-Jul-2016 6:09:57 pm
 	 * @return
 	 */
-	T toggle ();
+	T toggle (Class <T> target);
 
 	/**
 	 * @author Wasiq B
 	 * @since 26-Jul-2016 6:10:00 pm
 	 * @return
 	 */
-	T uncheck ();
+	T uncheck (Class <T> target);
 }

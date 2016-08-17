@@ -10,5 +10,5 @@ public interface IClickable <T extends IBlock> extends IElement, IHasText {
 	 * @since 26-Jul-2016 5:37:57 pm
 	 * @return
 	 */
-	T click ();
+	T click (Class <T> target);
 }

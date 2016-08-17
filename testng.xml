@@ -6,8 +6,12 @@
 		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
 	</listeners>
 	<test name="Test">
-		<packages>
+		<!-- <packages>
 			<package name="test" />
-		</packages>
+		</packages> -->
+		<classes>
+			<class name="test.WindowTest" />
+			<!-- <class name="test.LoginTest" /> -->
+		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

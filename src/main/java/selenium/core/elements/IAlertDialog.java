@@ -10,14 +10,14 @@ public interface IAlertDialog extends IBlock, IHasText {
 	 * @since 26-Jul-2016 5:30:02 pm
 	 * @return
 	 */
-	<T extends IBlock> T accept ();
+	<T extends IBlock> T accept (Class <T> target);
 
 	/**
 	 * @author Wasiq B
 	 * @since 26-Jul-2016 5:30:31 pm
 	 * @return
 	 */
-	<T extends IBlock> T decline ();
+	<T extends IBlock> T decline (Class <T> target);
 
 	/**
 	 * @author Wasiq B

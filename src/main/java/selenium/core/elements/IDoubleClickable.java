@@ -10,5 +10,5 @@ public interface IDoubleClickable <T extends IBlock> extends IClickable <T> {
 	 * @since 26-Jul-2016 5:49:34 pm
 	 * @return
 	 */
-	T doubleClick ();
+	T doubleClick (Class <T> target);
 }

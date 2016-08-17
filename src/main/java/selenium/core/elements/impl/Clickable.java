@@ -37,9 +37,9 @@ public class Clickable <T extends IBlock> extends Element implements IDoubleClic
 	 * @see selenium.core.elements.IClickable#click()
 	 */
 	@Override
-	public T click () {
+	public T click (Class <T> target) {
 		parent ().click ();
-		return session ().currentBlock ();
+		return session ().current (target).currentBlock ();
 	}
 
 	/*
@@ -47,8 +47,8 @@ public class Clickable <T extends IBlock> extends Element implements IDoubleClic
 	 * @see selenium.core.elements.IDoubleClickable#doubleClick()
 	 */
 	@Override
-	public T doubleClick () {
+	public T doubleClick (Class <T> target) {
 		new Actions (session ().driver ()).moveToElement (parent ()).doubleClick ().build ().perform ();
-		return session ().currentBlock ();
+		return session ().current (target).currentBlock ();
 	}
 }

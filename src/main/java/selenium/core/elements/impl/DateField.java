@@ -41,13 +41,13 @@ public class DateField <T extends IBlock> extends TextField <T> implements IDate
 	 * @see selenium.core.elements.IDateField#enterDate(java.util.Date)
 	 */
 	@Override
-	public T enterDate (final Date date) {
+	public T enterDate (final Date date, Class <T> target) {
 		final JavascriptExecutor js = (JavascriptExecutor) session ().driver ();
 		String script = "arguments[0].value = '%1$s';";
 		final SimpleDateFormat sf = new SimpleDateFormat ("yyyy-MM-dd");
 		script = String.format (script, sf.format (date));
 		js.executeScript (script, parent ());
-		return session ().currentBlock (parent ());
+		return session ().current (parent (), target).currentBlock ();
 	}
 
 	/*

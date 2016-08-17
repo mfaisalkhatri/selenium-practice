@@ -11,7 +11,7 @@ public interface INumericField <T extends IBlock> extends ITextField <T> {
 	 * @param value
 	 * @return
 	 */
-	T enterNumber (double value);
+	T enterNumber (double value, Class <T> target);
 
 	/**
 	 * @author Wasiq B
@@ -19,7 +19,7 @@ public interface INumericField <T extends IBlock> extends ITextField <T> {
 	 * @param value
 	 * @return
 	 */
-	T enterNumber (long value);
+	T enterNumber (long value, Class <T> target);
 
 	/**
 	 * @author Wasiq B

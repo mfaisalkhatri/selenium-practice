@@ -1,9 +1,12 @@
+
 package test;
 
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
@@ -24,10 +27,17 @@ public class BaseSeleniumTest {
 			System.setProperty ("webdriver.ie.driver", System.getProperty ("user.dir") + "/driver/IEDriverServer.exe");
 			driver = new InternetExplorerDriver ();
 		}
-		else {
-			driver = new FirefoxDriver ();
+		else if (env != null && env.equals ("chrome")) {
+			System.setProperty ("webdriver.chrome.driver",
+					System.getProperty ("user.dir") + "/driver/chromedriver.exe");
+			driver = new ChromeDriver ();
 		}
-		driver.navigate ().to ("http://the-internet.herokuapp.com/login");
+		else {
+			FirefoxProfile ffprofile = new FirefoxProfile ();
+			ffprofile.setPreference ("xpinstall.signatures.required", false);
+			driver = new FirefoxDriver (ffprofile);
+		}
+		driver.get ("http://the-internet.herokuapp.com/nested_frames");
 		driver.manage ().window ().maximize ();
 		driver.manage ().timeouts ().implicitlyWait (10, TimeUnit.SECONDS);
 

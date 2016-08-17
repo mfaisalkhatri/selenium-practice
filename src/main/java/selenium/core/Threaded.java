@@ -1,7 +1,5 @@
 package selenium.core;
 
-import java.lang.reflect.ParameterizedType;
-
 import selenium.core.driver.IDriverEnvironment;
 
 /**
@@ -46,13 +44,10 @@ public class Threaded {
 	 * @param driver
 	 * @return
 	 */
-	@SuppressWarnings ("unchecked")
 	public static <TDriver extends IDriverEnvironment> Session with (final Class <TDriver> driver) {
 		close ();
-		final ParameterizedType type = (ParameterizedType) driver.getGenericSuperclass ();
-		final Class <TDriver> cls = (Class <TDriver>) type.getActualTypeArguments () [0];
 		try {
-			final TDriver d = cls.newInstance ();
+			final TDriver d = driver.newInstance ();
 			current (new Session (d));
 		}
 		catch (InstantiationException | IllegalAccessException e) {

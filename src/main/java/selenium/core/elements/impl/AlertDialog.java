@@ -53,9 +53,9 @@ public class AlertDialog extends Block implements IAlertDialog {
 	 * @see selenium.core.elements.IAlertDialog#accept()
 	 */
 	@Override
-	public <T extends IBlock> T accept () {
+	public <T extends IBlock> T accept (Class <T> target) {
 		this.alert.accept ();
-		return session ().currentBlock (this.parent);
+		return session ().current (this.parent, target).currentBlock ();
 	}
 
 	/*
@@ -63,9 +63,9 @@ public class AlertDialog extends Block implements IAlertDialog {
 	 * @see selenium.core.elements.IAlertDialog#decline()
 	 */
 	@Override
-	public <T extends IBlock> T decline () {
+	public <T extends IBlock> T decline (Class <T> target) {
 		this.alert.dismiss ();
-		return session ().currentBlock (this.parent);
+		return session ().current (this.parent, target).currentBlock ();
 	}
 
 	/*
@@ -75,7 +75,7 @@ public class AlertDialog extends Block implements IAlertDialog {
 	@Override
 	public IAlertDialog enterText (final String text) {
 		this.alert.sendKeys (text);
-		return session ().currentBlock (this.parent);
+		return session ().current (this.parent, getClass ()).currentBlock ();
 	}
 
 	/*

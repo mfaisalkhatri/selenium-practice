@@ -36,9 +36,9 @@ public class Option <T extends IBlock> extends Clickable <T> implements IOption 
 	 * @see selenium.core.elements.impl.Clickable#click()
 	 */
 	@Override
-	public T click () {
+	public T click (Class <T> target) {
 		this.parentBlock.parent ().click ();
 		parent ().click ();
-		return session ().currentBlock (parent ());
+		return session ().current (parent (), target).currentBlock ();
 	}
 }
