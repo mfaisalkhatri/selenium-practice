@@ -4,22 +4,22 @@ package selenium.controls.interfaces;
  * @author wasiq.bhamla
  * @since Oct 18, 2016 12:28:00 PM
  */
-public interface IClickable extends IControl {
+public interface IClickable <T extends IContainer> extends IControl {
 	/**
 	 * @author wasiq.bhamla
 	 * @since Oct 18, 2016 12:28:46 PM
 	 */
-	void click ();
+	T click ();
 
 	/**
 	 * @author wasiq.bhamla
 	 * @since Oct 18, 2016 12:29:00 PM
 	 */
-	void doubleClick ();
+	T doubleClick ();
 
 	/**
 	 * @author wasiq.bhamla
 	 * @since Oct 18, 2016 12:29:10 PM
 	 */
-	void contextClick ();
+	T contextClick ();
 }

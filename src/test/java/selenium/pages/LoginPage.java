@@ -35,11 +35,10 @@ public class LoginPage extends AbstractPage {
 	 * @since 19-Oct-2016 8:39:44 PM
 	 * @param userId
 	 * @param password
+	 * @return
 	 */
-	public void doLogin (final String userId, final String password) {
-		userId ().enterText (userId);
-		password ().enterText (password);
-		login ().click ();
+	public DashboardPage doLogin (final String userId, final String password) {
+		return userId ().enterText (userId).password ().enterText (password).login ().click ();
 	}
 
 	/**
@@ -62,8 +61,8 @@ public class LoginPage extends AbstractPage {
 	 * @since 19-Oct-2016 8:27:14 PM
 	 * @return
 	 */
-	public IClickable login () {
-		return new Clickable (this, By.name ("btnLogin"));
+	public IClickable <DashboardPage> login () {
+		return new Clickable <DashboardPage> (this, By.name ("btnLogin"), e -> new DashboardPage ());
 	}
 
 	/**
@@ -71,8 +70,8 @@ public class LoginPage extends AbstractPage {
 	 * @since 19-Oct-2016 8:26:19 PM
 	 * @return
 	 */
-	public ITextField password () {
-		return new TextBox (this, By.name ("password"));
+	public ITextField <LoginPage> password () {
+		return new TextBox <LoginPage> (this, By.name ("password"), e -> new LoginPage ());
 	}
 
 	/**
@@ -80,8 +79,8 @@ public class LoginPage extends AbstractPage {
 	 * @since 19-Oct-2016 8:28:07 PM
 	 * @return
 	 */
-	public IClickable reset () {
-		return new Clickable (this, By.name ("btnReset"));
+	public IClickable <LoginPage> reset () {
+		return new Clickable <LoginPage> (this, By.name ("btnReset"), e -> new LoginPage ());
 	}
 
 	/**
@@ -89,7 +88,7 @@ public class LoginPage extends AbstractPage {
 	 * @since 19-Oct-2016 8:25:29 PM
 	 * @return
 	 */
-	public ITextField userId () {
-		return new TextBox (this, By.name ("uid"));
+	public ITextField <LoginPage> userId () {
+		return new TextBox <LoginPage> (this, By.name ("uid"), e -> new LoginPage ());
 	}
 }

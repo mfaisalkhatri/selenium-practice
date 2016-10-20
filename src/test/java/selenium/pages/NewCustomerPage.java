@@ -23,12 +23,12 @@ public class NewCustomerPage extends DashboardPage {
 		super ();
 	}
 
-	public ITextField address () {
-		return new TextBox (this, By.name ("addr"));
+	public ITextField <NewCustomerPage> address () {
+		return new TextBox <NewCustomerPage> (this, By.name ("addr"), e -> new NewCustomerPage ());
 	}
 
-	public ITextField city () {
-		return new TextBox (this, By.name ("city"));
+	public ITextField <NewCustomerPage> city () {
+		return new TextBox <NewCustomerPage> (this, By.name ("city"), e -> new NewCustomerPage ());
 	}
 
 	public void create (final String name, final boolean male, final String dob, final String address, final String city, final String state, final String pin, final String mobile, final String email, final String password) {
@@ -38,61 +38,55 @@ public class NewCustomerPage extends DashboardPage {
 		else
 			female ().click ();
 		dateOfBirth ().parent ().sendKeys (dob);
-		address ().enterText (address);
-		city ().enterText (city);
-		state ().enterText (state);
-		pin ().enterText (pin);
-		mobileNo ().enterText (mobile);
-		email ().enterText (email);
-		password ().enterText (password);
-		submit ().click ();
+		address ().enterText (address).city ().enterText (city).state ().enterText (state).pin ().enterText (pin).mobileNo ().enterText (mobile)
+				.email ().enterText (email).password ().enterText (password).submit ().click ();
 	}
 
-	public ITextField customerName () {
-		return new TextBox (this, By.name ("name"));
+	public ITextField <NewCustomerPage> customerName () {
+		return new TextBox <NewCustomerPage> (this, By.name ("name"), e -> new NewCustomerPage ());
 	}
 
-	public ITextField dateOfBirth () {
-		return new TextBox (this, By.id ("dob"));
+	public ITextField <NewCustomerPage> dateOfBirth () {
+		return new TextBox <NewCustomerPage> (this, By.id ("dob"), e -> new NewCustomerPage ());
 	}
 
-	public ITextField email () {
-		return new TextBox (this, By.name ("emailid"));
+	public ITextField <NewCustomerPage> email () {
+		return new TextBox <NewCustomerPage> (this, By.name ("emailid"), e -> new NewCustomerPage ());
 	}
 
-	public IClickable female () {
-		return new Clickable (this, By.cssSelector ("input[value='f']"));
+	public IClickable <NewCustomerPage> female () {
+		return new Clickable <NewCustomerPage> (this, By.cssSelector ("input[value='f']"), e -> new NewCustomerPage ());
 	}
 
-	public IClickable male () {
-		return new Clickable (this, By.cssSelector ("input[value='m']"));
+	public IClickable <NewCustomerPage> male () {
+		return new Clickable <NewCustomerPage> (this, By.cssSelector ("input[value='m']"), e -> new NewCustomerPage ());
 	}
 
-	public ITextField mobileNo () {
-		return new TextBox (this, By.name ("telephoneno"));
+	public ITextField <NewCustomerPage> mobileNo () {
+		return new TextBox <NewCustomerPage> (this, By.name ("telephoneno"), e -> new NewCustomerPage ());
 	}
 
-	public ITextField password () {
-		return new TextBox (this, By.name ("password"));
+	public ITextField <NewCustomerPage> password () {
+		return new TextBox <NewCustomerPage> (this, By.name ("password"), e -> new NewCustomerPage ());
 	}
 
-	public ITextField pin () {
-		return new TextBox (this, By.name ("pinno"));
+	public ITextField <NewCustomerPage> pin () {
+		return new TextBox <NewCustomerPage> (this, By.name ("pinno"), e -> new NewCustomerPage ());
 	}
 
-	public IClickable reset () {
-		return new Clickable (this, By.name ("res"));
+	public IClickable <NewCustomerPage> reset () {
+		return new Clickable <NewCustomerPage> (this, By.name ("res"), e -> new NewCustomerPage ());
 	}
 
 	public ITable <SimpleTableColumn> resultTable () {
-		return new Table<> (this, By.id ("customer"), SimpleTableColumn.class);
+		return new Table <NewCustomerPage, SimpleTableColumn> (this, By.id ("customer"), SimpleTableColumn.class, e -> new NewCustomerPage ());
 	}
 
-	public ITextField state () {
-		return new TextBox (this, By.name ("state"));
+	public ITextField <NewCustomerPage> state () {
+		return new TextBox <NewCustomerPage> (this, By.name ("state"), e -> new NewCustomerPage ());
 	}
 
-	public IClickable submit () {
-		return new Clickable (this, By.name ("sub"));
+	public IClickable <DashboardPage> submit () {
+		return new Clickable <DashboardPage> (this, By.name ("sub"), e -> new DashboardPage ());
 	}
 }

@@ -1,23 +1,27 @@
 package selenium.controls.interfaces.impl;
 
+import java.util.function.Function;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import selenium.controls.interfaces.ICheckBox;
+import selenium.controls.interfaces.IClickable;
 import selenium.controls.interfaces.IContainer;
 
 /**
  * @author wasiq.bhamla
  * @since 18-Oct-2016 9:30:47 PM
  */
-public class CheckBox extends Clickable implements selenium.controls.interfaces.ICheckBox {
+public class CheckBox <T extends IContainer> extends Clickable <T> implements ICheckBox <T> {
 	/**
 	 * @author wasiq.bhamla
 	 * @since 18-Oct-2016 9:30:47 PM
 	 * @param parentContainer
 	 * @param locator
 	 */
-	public CheckBox (final IContainer parentContainer, final By locator) {
-		super (parentContainer, locator);
+	public CheckBox (final IContainer parentContainer, final By locator, Function <IClickable <T>, T> target) {
+		super (parentContainer, locator, target);
 	}
 
 	/**
@@ -26,8 +30,8 @@ public class CheckBox extends Clickable implements selenium.controls.interfaces.
 	 * @param parentContainer
 	 * @param parent
 	 */
-	public CheckBox (final IContainer parentContainer, final WebElement parent) {
-		super (parentContainer, parent);
+	public CheckBox (final IContainer parentContainer, final WebElement parent, Function <IClickable <T>, T> target) {
+		super (parentContainer, parent, target);
 	}
 
 	/*
@@ -35,10 +39,11 @@ public class CheckBox extends Clickable implements selenium.controls.interfaces.
 	 * @see selenium.controls.interfaces.CheckBox#check()
 	 */
 	@Override
-	public void check () {
+	public T check () {
 		if (!selected ()) {
-			click ();
+			return click ();
 		}
+		return this.target.apply (this);
 	}
 
 	/*
@@ -46,8 +51,8 @@ public class CheckBox extends Clickable implements selenium.controls.interfaces.
 	 * @see selenium.controls.interfaces.CheckBox#toggle()
 	 */
 	@Override
-	public void toggle () {
-		click ();
+	public T toggle () {
+		return click ();
 	}
 
 	/*
@@ -55,9 +60,10 @@ public class CheckBox extends Clickable implements selenium.controls.interfaces.
 	 * @see selenium.controls.interfaces.CheckBox#uncheck()
 	 */
 	@Override
-	public void uncheck () {
+	public T uncheck () {
 		if (selected ()) {
-			click ();
+			return click ();
 		}
+		return this.target.apply (this);
 	}
 }

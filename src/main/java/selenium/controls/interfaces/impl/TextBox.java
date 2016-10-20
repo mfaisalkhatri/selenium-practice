@@ -1,5 +1,8 @@
 package selenium.controls.interfaces.impl;
 
+import java.util.Objects;
+import java.util.function.Function;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -10,15 +13,15 @@ import selenium.controls.interfaces.ITextField;
  * @author wasiq.bhamla
  * @since 18-Oct-2016 8:42:47 PM
  */
-public class TextBox extends AbstractControl implements ITextField {
+public class TextBox <T extends IContainer> extends AbstractControl <ITextField <T>, T> implements ITextField <T> {
 	/**
 	 * @author wasiq.bhamla
 	 * @since 18-Oct-2016 8:42:47 PM
 	 * @param parent
 	 * @param locator
 	 */
-	public TextBox (final IContainer parent, final By locator) {
-		super (parent, locator);
+	public TextBox (final IContainer parent, final By locator, final Function <ITextField <T>, T> target) {
+		super (parent, locator, target);
 	}
 
 	/**
@@ -27,8 +30,8 @@ public class TextBox extends AbstractControl implements ITextField {
 	 * @param parentContainer
 	 * @param parent
 	 */
-	public TextBox (final IContainer parentContainer, final WebElement parent) {
-		super (parentContainer, parent);
+	public TextBox (final IContainer parentContainer, final WebElement parent, final Function <ITextField <T>, T> target) {
+		super (parentContainer, parent, target);
 	}
 
 	/*
@@ -36,10 +39,11 @@ public class TextBox extends AbstractControl implements ITextField {
 	 * @see selenium.controls.interfaces.TextField#appendText(java.lang.String)
 	 */
 	@Override
-	public void appendText (final String text) {
-		for (final char c : text.toCharArray ()) {
-			parent ().sendKeys (Character.toString (c));
-		}
+	public T appendText (final String text) {
+		T res = null;
+		for (final char c : text.toCharArray ())
+			res = sendKeys (Character.toString (c));
+		return res;
 	}
 
 	/*
@@ -47,9 +51,20 @@ public class TextBox extends AbstractControl implements ITextField {
 	 * @see selenium.controls.interfaces.TextField#enterText(java.lang.String)
 	 */
 	@Override
-	public void enterText (final String text) {
+	public T enterText (final String text) {
 		parent ().clear ();
-		appendText (text);
+		return appendText (text);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see selenium.controls.interfaces.ITextField#sendKeys(java.lang.String)
+	 */
+	@Override
+	public T sendKeys (final String text) {
+		Objects.requireNonNull (this.target);
+		parent ().sendKeys (text);
+		return this.target.apply (this);
 	}
 
 	/*

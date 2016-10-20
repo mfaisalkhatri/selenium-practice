@@ -1,16 +1,20 @@
 package selenium.controls.interfaces.impl;
 
+import java.util.function.Function;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import selenium.controls.interfaces.IContainer;
+import selenium.controls.interfaces.IControl;
 
 /**
  * @author wasiq.bhamla
  * @since Oct 18, 2016 3:46:55 PM
  */
-public class AbstractControl extends AbstractContainer {
+public class AbstractControl <E extends IControl, T extends IContainer> extends AbstractContainer {
 	protected final IContainer parentContainer;
+	protected final Function <E, T> target;
 
 	/**
 	 * @author wasiq.bhamla
@@ -18,9 +22,10 @@ public class AbstractControl extends AbstractContainer {
 	 * @param parentContainer
 	 * @param locator
 	 */
-	protected AbstractControl (final IContainer parentContainer, final By locator) {
+	protected AbstractControl (final IContainer parentContainer, final By locator, final Function <E, T> target) {
 		super (parentContainer.driver (), parentContainer.parent ().findElement (locator));
 		this.parentContainer = parentContainer;
+		this.target = target;
 	}
 
 	/**
@@ -29,8 +34,9 @@ public class AbstractControl extends AbstractContainer {
 	 * @param parentContainer
 	 * @param parent
 	 */
-	protected AbstractControl (final IContainer parentContainer, final WebElement parent) {
+	protected AbstractControl (final IContainer parentContainer, final WebElement parent, final Function <E, T> target) {
 		super (parentContainer.driver (), parent);
 		this.parentContainer = parentContainer;
+		this.target = target;
 	}
 }

@@ -3,7 +3,6 @@ package selenium.controls.interfaces.impl;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import selenium.controls.interfaces.IClickable;
 import selenium.controls.interfaces.ITableColumn;
 
 /**
@@ -19,14 +18,5 @@ public class SimpleTableColumn extends AbstractContainer implements ITableColumn
 	 */
 	public SimpleTableColumn (final WebDriver driver, final WebElement parent) {
 		super (driver, parent);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see selenium.controls.interfaces.ITableColumn#cell()
-	 */
-	@Override
-	public IClickable cell () {
-		return new Clickable (this, parent ());
 	}
 }

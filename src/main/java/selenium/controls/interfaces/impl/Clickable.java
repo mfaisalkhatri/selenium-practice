@@ -1,28 +1,27 @@
-/**
- *
- */
 package selenium.controls.interfaces.impl;
+
+import java.util.function.Function;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import selenium.controls.interfaces.IClickable;
 import selenium.controls.interfaces.IContainer;
 
 /**
  * @author wasiq.bhamla
  * @since 18-Oct-2016 9:27:07 PM
  */
-public class Clickable extends AbstractControl implements selenium.controls.interfaces.IClickable {
-
+public class Clickable <T extends IContainer> extends AbstractControl <IClickable <T>, T> implements IClickable <T> {
 	/**
 	 * @author wasiq.bhamla
 	 * @since 18-Oct-2016 9:27:07 PM
 	 * @param parentContainer
 	 * @param locator
 	 */
-	public Clickable (final IContainer parentContainer, final By locator) {
-		super (parentContainer, locator);
+	public Clickable (final IContainer parentContainer, final By locator, final Function <IClickable <T>, T> target) {
+		super (parentContainer, locator, target);
 	}
 
 	/**
@@ -31,8 +30,8 @@ public class Clickable extends AbstractControl implements selenium.controls.inte
 	 * @param parentContainer
 	 * @param parent
 	 */
-	public Clickable (final IContainer parentContainer, final WebElement parent) {
-		super (parentContainer, parent);
+	public Clickable (final IContainer parentContainer, final WebElement parent, final Function <IClickable <T>, T> target) {
+		super (parentContainer, parent, target);
 	}
 
 	/*
@@ -40,8 +39,9 @@ public class Clickable extends AbstractControl implements selenium.controls.inte
 	 * @see selenium.controls.interfaces.Clickable#click()
 	 */
 	@Override
-	public void click () {
+	public T click () {
 		parent ().click ();
+		return this.target.apply (this);
 	}
 
 	/*
@@ -49,9 +49,10 @@ public class Clickable extends AbstractControl implements selenium.controls.inte
 	 * @see selenium.controls.interfaces.Clickable#contextClick()
 	 */
 	@Override
-	public void contextClick () {
+	public T contextClick () {
 		final Actions action = new Actions (driver ());
 		action.contextClick (parent ()).build ().perform ();
+		return this.target.apply (this);
 	}
 
 	/*
@@ -59,8 +60,9 @@ public class Clickable extends AbstractControl implements selenium.controls.inte
 	 * @see selenium.controls.interfaces.Clickable#doubleClick()
 	 */
 	@Override
-	public void doubleClick () {
+	public T doubleClick () {
 		final Actions action = new Actions (driver ());
 		action.moveToElement (parent ()).doubleClick ().build ().perform ();
+		return this.target.apply (this);
 	}
 }
