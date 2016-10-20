@@ -6,12 +6,8 @@
 		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
 	</listeners>
 	<test name="Test">
-		<!-- <packages>
-			<package name="test" />
-		</packages> -->
 		<classes>
-			<class name="test.WindowTest" />
-			<!-- <class name="test.LoginTest" /> -->
+			<class name="selenium.tests" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

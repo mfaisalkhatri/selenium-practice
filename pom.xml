@@ -38,21 +38,5 @@
 			<artifactId>velocity-dep</artifactId>
 			<version>1.4</version>
 		</dependency>
-		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-java8</artifactId>
-			<version>1.2.4</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-junit</artifactId>
-			<version>1.2.4</version>
-		</dependency>
-		<dependency>
-			<groupId>net.jodah</groupId>
-			<artifactId>typetools</artifactId>
-			<version>0.4.7</version>
-		</dependency>
 	</dependencies>
 </project>
