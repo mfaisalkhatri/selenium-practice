@@ -31,15 +31,31 @@ public class NewCustomerPage extends DashboardPage {
 		return new TextBox <NewCustomerPage> (this, By.name ("city"), e -> new NewCustomerPage ());
 	}
 
-	public void create (final String name, final boolean male, final String dob, final String address, final String city, final String state, final String pin, final String mobile, final String email, final String password) {
+	public void create (final String name, final boolean male, final String dob, final String address,
+			final String city, final String state, final String pin, final String mobile, final String email,
+			final String password) {
 		customerName ().enterText (name);
 		if (male)
 			male ().click ();
 		else
 			female ().click ();
-		dateOfBirth ().parent ().sendKeys (dob);
-		address ().enterText (address).city ().enterText (city).state ().enterText (state).pin ().enterText (pin).mobileNo ().enterText (mobile)
-				.email ().enterText (email).password ().enterText (password).submit ().click ();
+		dateOfBirth ().parent ()
+			.sendKeys (dob);
+		address ().enterText (address)
+			.city ()
+			.enterText (city)
+			.state ()
+			.enterText (state)
+			.pin ()
+			.enterText (pin)
+			.mobileNo ()
+			.enterText (mobile)
+			.email ()
+			.enterText (email)
+			.password ()
+			.enterText (password)
+			.submit ()
+			.click ();
 	}
 
 	public ITextField <NewCustomerPage> customerName () {
@@ -79,7 +95,8 @@ public class NewCustomerPage extends DashboardPage {
 	}
 
 	public ITable <SimpleTableColumn> resultTable () {
-		return new Table <NewCustomerPage, SimpleTableColumn> (this, By.id ("customer"), SimpleTableColumn.class, e -> new NewCustomerPage ());
+		return new Table <NewCustomerPage, SimpleTableColumn> (this, By.id ("customer"), SimpleTableColumn.class,
+				e -> new NewCustomerPage ());
 	}
 
 	public ITextField <NewCustomerPage> state () {
