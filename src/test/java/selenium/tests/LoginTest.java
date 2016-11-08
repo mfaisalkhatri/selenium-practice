@@ -14,7 +14,7 @@ public class LoginTest extends AbstractTest {
 	@Test
 	public void testLogin () {
 		final LoginPage login = new LoginPage ();
-		login.doLogin ("mngr50086", "YqUqUdu")
+		login.doLogin ("mngr53616", "mazUzez")
 			.sideBar ()
 			.link ("New Customer")
 			.click ();
