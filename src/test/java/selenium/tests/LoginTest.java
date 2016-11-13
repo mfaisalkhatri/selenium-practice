@@ -20,7 +20,7 @@ public class LoginTest extends AbstractTest {
 			.click ();
 
 		NewCustomerPage cust = new NewCustomerPage ();
-		cust.create ("Wasiq Bhamla", true, "06211985", "Mazagaon", "Mumbai", "Maharashtra", "400010", "9987063686",
+		cust.create ("Wasiq Bhamla", true, "21061985", "Mazagaon", "Mumbai", "Maharashtra", "400010", "9987063686",
 				"wasbhamla2004@gmail.com", "1234");
 
 		cust = new NewCustomerPage ();
