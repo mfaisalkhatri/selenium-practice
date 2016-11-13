@@ -38,7 +38,11 @@ public class LoginPage extends AbstractPage {
 	 * @return
 	 */
 	public DashboardPage doLogin (final String userId, final String password) {
-		return userId ().enterText (userId).password ().enterText (password).login ().click ();
+		return userId ().enterText (userId)
+			.password ()
+			.enterText (password)
+			.login ()
+			.click ();
 	}
 
 	/**
@@ -62,7 +66,7 @@ public class LoginPage extends AbstractPage {
 	 * @return
 	 */
 	public IClickable <DashboardPage> login () {
-		return new Clickable <DashboardPage> (this, By.name ("btnLogin"), e -> new DashboardPage ());
+		return new Clickable <> (this, By.name ("btnLogin"), e -> new DashboardPage ());
 	}
 
 	/**
@@ -71,7 +75,7 @@ public class LoginPage extends AbstractPage {
 	 * @return
 	 */
 	public ITextField <LoginPage> password () {
-		return new TextBox <LoginPage> (this, By.name ("password"), e -> new LoginPage ());
+		return new TextBox <> (this, By.name ("password"), e -> new LoginPage ());
 	}
 
 	/**
@@ -80,7 +84,7 @@ public class LoginPage extends AbstractPage {
 	 * @return
 	 */
 	public IClickable <LoginPage> reset () {
-		return new Clickable <LoginPage> (this, By.name ("btnReset"), e -> new LoginPage ());
+		return new Clickable <> (this, By.name ("btnReset"), e -> new LoginPage ());
 	}
 
 	/**
@@ -89,6 +93,6 @@ public class LoginPage extends AbstractPage {
 	 * @return
 	 */
 	public ITextField <LoginPage> userId () {
-		return new TextBox <LoginPage> (this, By.name ("uid"), e -> new LoginPage ());
+		return new TextBox <> (this, By.name ("uid"), e -> new LoginPage ());
 	}
 }

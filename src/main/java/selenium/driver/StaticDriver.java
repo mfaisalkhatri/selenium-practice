@@ -39,14 +39,20 @@ public final class StaticDriver {
 				case CHROME:
 				default:
 					final String dir = System.getProperty ("user.dir");
-					final String path = dir + "/src/test/resources/mac_chromedriver.exe";
+					final String path = dir + "/src/test/resources/win_chromedriver.exe";
 					System.setProperty ("webdriver.chrome.driver", path);
 					driver = new ChromeDriver ();
 					break;
 			}
-			driver.manage ().window ().maximize ();
-			driver.manage ().timeouts ().pageLoadTimeout (30, TimeUnit.SECONDS);
-			driver.manage ().timeouts ().implicitlyWait (10, TimeUnit.SECONDS);
+			driver.manage ()
+				.window ()
+				.maximize ();
+			driver.manage ()
+				.timeouts ()
+				.pageLoadTimeout (30, TimeUnit.SECONDS);
+			driver.manage ()
+				.timeouts ()
+				.implicitlyWait (10, TimeUnit.SECONDS);
 		}
 		return driver;
 	}
