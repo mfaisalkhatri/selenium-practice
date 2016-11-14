@@ -1,10 +1,9 @@
 package selenium.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import selenium.pages.DepositPage;
 import selenium.pages.LoginPage;
-import selenium.pages.NewCustomerPage;
 
 /**
  * @author wasiq.bhamla
@@ -16,18 +15,20 @@ public class LoginTest extends AbstractTest {
 		final LoginPage login = new LoginPage ();
 		login.doLogin ("mngr53616", "mazUzez")
 			.sideBar ()
-			.link ("New Customer")
+			.link ("Deposit")
 			.click ();
 
-		NewCustomerPage cust = new NewCustomerPage ();
-		cust.create ("Wasiq Bhamla", true, "21061985", "Mazagaon", "Mumbai", "Maharashtra", "400010", "9987063686",
-				"wasbhamla2004@gmail.com", "1234");
+		/*
+		 * NewCustomerPage cust = new NewCustomerPage (); cust.create ("Wasiq Bhamla", true,
+		 * "21061985", "Mazagaon", "Mumbai", "Maharashtra", "400010", "9987063686",
+		 * "wasbhamla2004@gmail.com", "1234"); cust = new NewCustomerPage (); final String message =
+		 * cust.resultTable () .row (0) .column (0) .text (); Assert.assertEquals (message,
+		 * "Customer Registered Successfully!!!");
+		 */
 
-		cust = new NewCustomerPage ();
-		final String message = cust.resultTable ()
-			.row (0)
-			.column (0)
-			.text ();
-		Assert.assertEquals (message, "Customer Registered Successfully!!!");
+		final DepositPage dp = new DepositPage ();
+		dp.deposit ("12541", "5000", "Deposited cash amt");
+
 	}
+
 }
